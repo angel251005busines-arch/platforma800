@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Код по ФИО</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.25);
+            padding: 32px 28px;
+            width: 100%;
+            max-width: 560px;
+            transition: all 0.2s;
+        }
+        h1 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            color: #0b1e33;
+            letter-spacing: -0.01em;
+        }
+        .sub {
+            color: #5e6f8d;
+            font-size: 0.95rem;
+            margin-bottom: 28px;
+            border-bottom: 1px solid #e4e9f2;
+            padding-bottom: 16px;
+        }
+        label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #1e3b5c;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+        select {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 1rem;
+            border: 1.5px solid #d0dae9;
+            border-radius: 16px;
+            background: #ffffff;
+            color: #0f263d;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b5e83' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 20px;
+            cursor: pointer;
+            outline: none;
+            transition: border 0.15s, box-shadow 0.15s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+        select:hover {
+            border-color: #8aa2c7;
+        }
+        select:focus {
+            border-color: #2e6b9e;
+            box-shadow: 0 0 0 4px rgba(46, 107, 158, 0.15);
+        }
+        .result-block {
+            margin-top: 28px;
+            background: #f0f5fe;
+            border-radius: 20px;
+            padding: 20px 22px;
+            border-left: 6px solid #2e6b9e;
+            transition: all 0.2s;
+        }
+        .result-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            font-weight: 600;
+            color: #3f5e7c;
+            margin-bottom: 6px;
+        }
+        .code-value {
+            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+            font-size: 1.4rem;
+            font-weight: 600;
+            word-break: break-all;
+            color: #0a1e2f;
+            background: #ffffff;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid #cdddf0;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+            line-height: 1.4;
+        }
+        .empty-message {
+            color: #7b8ba3;
+            font-size: 1rem;
+            font-style: italic;
+            text-align: center;
+            padding: 12px 0;
+        }
+        .class-tag {
+            display: inline-block;
+            background: #e0e9f5;
+            color: #1c4870;
+            border-radius: 40px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-left: 8px;
+            vertical-align: middle;
+            letter-spacing: 0.2px;
+        }
+        .footer-note {
+            margin-top: 16px;
+            font-size: 0.78rem;
+            color: #8598b0;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>👤 Ученик → код</h1>
+    <div class="sub">Выберите фамилию, имя и отчество — код появится автоматически</div>
+
+    <label for="studentSelect">ФИО ученика</label>
+    <select id="studentSelect">
+        <option value="" disabled selected>— выберите из списка —</option>
+    </select>
+
+    <div class="result-block" id="resultBlock">
+        <div class="result-label">Индивидуальный код</div>
+        <div id="codeContainer" class="code-value">—</div>
+    </div>
+    <div class="footer-note">8.1 · 19421/edu526320/8</div>
+</div>
+
+<script>
+    (function() {
+        // Исходные данные: код, ФИО, класс
+        const students = [
+            { code: "19421/edu526320/8/gq5wvzrw", name: "Авербух Маргарита Вячеславовна", class: "8.1" },
+            { code: "19421/edu526320/8/9r6wq35q", name: "Алексеев Артём Александрович", class: "8.1" },
+            { code: "19421/edu526320/8/g9r6v3rq", name: "Алексеев Матвей Александрович", class: "8.1" },
+            { code: "19421/edu526320/8/83r32857", name: "Афанасьева Анастасия Олеговна", class: "8.1" },
+            { code: "19421/edu526320/8/25gww95v", name: "Бесков Николай Анатольевич", class: "8.1" },
+            { code: "19421/edu526320/8/7r766852", name: "Богомолов Павел Сергеевич", class: "8.1" },
+            { code: "19421/edu526320/8/7r9q7wrq", name: "Варламов Никита Дмитриевич", class: "8.1" },
+            { code: "19421/edu526320/8/895472r4", name: "Ганюшина Ульяна Алексеевна", class: "8.1" },
+            { code: "19421/edu526320/8/83r3q7r7", name: "Господчиков Арсений Сергеевич", class: "8.1" },
+            { code: "19421/edu526320/8/vrqv9354", name: "Дружинин Роман Алексеевич", class: "8.1" },
+            { code: "19421/edu526320/8/q58w63r8", name: "Евтушок Глеб Андреевич", class: "8.1" },
+            { code: "19421/edu526320/8/w7r9v5q4", name: "Ерышов Семен Александрович", class: "8.1" },
+            { code: "19421/edu526320/8/95499gr4", name: "Игнатьев Денис Данилович", class: "8.1" },
+            { code: "19421/edu526320/8/vrq6g954", name: "Клопова Алина Вячеславовна", class: "8.1" },
+            { code: "19421/edu526320/8/95496wr4", name: "Коробкова Кристина Дмитриевна", class: "8.1" },
+            { code: "19421/edu526320/8/7r9wwvrq", name: "Левицкий Дмитрий Денисович", class: "8.1" },
+            { code: "19421/edu526320/8/25gzz3rv", name: "Лисин Ярослав Алексеевич", class: "8.1" },
+            { code: "19421/edu526320/8/9r6v67rq", name: "Любимцев Илья Алексеевич", class: "8.1" },
+            { code: "19421/edu526320/8/q7r76g52", name: "Лязгина Полина Ильинична", class: "8.1" },
+            { code: "19421/edu526320/8/w7r94w5q", name: "Майоров Артем Андреевич", class: "8.1" },
+            { code: "19421/edu526320/8/7r2z38rq", name: "Миронова Анна Вячеславовна", class: "8.1" },
+            { code: "19421/edu526320/8/6vrqq3r4", name: "Мишарин Матвей Алексеевич", class: "8.1" },
+            { code: "19421/edu526320/8/27r2zrq9", name: "Момин Матвей Константинович", class: "8.1" },
+            { code: "19421/edu526320/8/vrq6w954", name: "Самойлин Никита Александрович", class: "8.1" },
+            { code: "19421/edu526320/8/q7r798r2", name: "Сказнев Роман Ильич", class: "8.1" },
+            { code: "19421/edu526320/8/7r2zq4rq", name: "Соколова Нелли Алексеевна", class: "8.1" },
+            { code: "19421/edu526320/8/q58wggr8", name: "Старшинов Тимофей Алексеевич", class: "8.1" },
+            { code: "19421/edu526320/8/7rzw3954", name: "Федосенко Макар Павлович", class: "8.1" }
+        ];
+
+        const selectEl = document.getElementById('studentSelect');
+        const codeContainer = document.getElementById('codeContainer');
+
+        // Заполняем select опциями
+        students.forEach((student, index) => {
+            const option = document.createElement('option');
+            option.value = index;               // индекс в массиве — уникальный идентификатор
+            option.textContent = student.name;  // только ФИО, без класса
+            selectEl.appendChild(option);
+        });
+
+        // Функция обновления кода
+        function updateCode() {
+            const selectedIndex = selectEl.value;
+
+            if (selectedIndex === '' || selectedIndex === undefined) {
+                codeContainer.textContent = '—';
+                return;
+            }
+
+            const student = students[selectedIndex];
+            if (student) {
+                codeContainer.textContent = student.code;
+            } else {
+                codeContainer.textContent = '—';
+            }
+        }
+
+        // Слушаем изменение выбора
+        selectEl.addEventListener('change', updateCode);
+
+        // На случай, если браузер восстановит выбранное значение при перезагрузке
+        // (небольшая задержка, чтобы DOM точно прогрузился)
+        window.addEventListener('load', function() {
+            // Если по какой-то причине value не пустой (например, автозаполнение), обновим
+            if (selectEl.value !== '') {
+                updateCode();
+            } else {
+                codeContainer.textContent = '—';
+            }
+        });
+
+        // Дополнительно: если пользователь выбрал что-то до load (маловероятно, но)
+        // сразу вызываем обновление, чтобы не было рассинхрона
+        updateCode();
+    })();
+</script>
+</body>
+</html>
