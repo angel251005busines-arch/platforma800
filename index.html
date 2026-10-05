@@ -3,187 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Код по ФИО · Физика 8.1</title>
+    <title>Биология 8.1 · код для олимпиады</title>
     <style>
         body {
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             background: #f5f7fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 16px;
-            box-sizing: border-box;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0; padding: 16px; box-sizing: border-box;
         }
         .card {
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.25);
-            padding: 32px 28px;
-            width: 100%;
-            max-width: 560px;
-            transition: all 0.2s;
+            background: #fff; border-radius: 24px;
+            box-shadow: 0 20px 40px -12px rgba(0,20,40,.25);
+            padding: 32px 28px; width: 100%; max-width: 560px;
         }
-        h1 {
-            font-size: 1.7rem;
-            font-weight: 600;
-            margin: 0 0 8px 0;
-            color: #0b1e33;
-            letter-spacing: -0.01em;
-        }
+        h1 { font-size: 1.6rem; margin: 0 0 8px; color: #0b1e33; }
         .sub {
-            color: #5e6f8d;
-            font-size: 0.95rem;
-            margin-bottom: 28px;
-            border-bottom: 1px solid #e4e9f2;
-            padding-bottom: 16px;
+            color: #5e6f8d; font-size: .95rem; margin-bottom: 24px;
+            border-bottom: 1px solid #e4e9f2; padding-bottom: 16px;
         }
         label {
-            display: block;
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: #1e3b5c;
-            margin-bottom: 8px;
-            letter-spacing: 0.3px;
+            display: block; font-weight: 500; font-size: .9rem;
+            color: #1e3b5c; margin-bottom: 8px;
         }
         select {
-            width: 100%;
-            padding: 14px 18px;
-            font-size: 1rem;
-            border: 1.5px solid #d0dae9;
-            border-radius: 16px;
-            background: #ffffff;
-            color: #0f263d;
-            appearance: none;
+            width: 100%; padding: 14px 18px; font-size: 1rem;
+            border: 1.5px solid #d0dae9; border-radius: 16px;
+            background: #fff; color: #0f263d; appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%233b5e83' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 18px center;
-            background-size: 20px;
-            cursor: pointer;
-            outline: none;
-            transition: border 0.15s, box-shadow 0.15s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-        }
-        select:hover {
-            border-color: #8aa2c7;
+            background-repeat: no-repeat; background-position: right 18px center;
+            background-size: 20px; cursor: pointer; outline: none;
         }
         select:focus {
             border-color: #2e6b9e;
-            box-shadow: 0 0 0 4px rgba(46, 107, 158, 0.15);
+            box-shadow: 0 0 0 4px rgba(46,107,158,.15);
         }
+        button {
+            margin-top: 18px; width: 100%; padding: 14px 18px;
+            font-size: 1rem; font-weight: 600; color: #fff;
+            background: #2e6b9e; border: none; border-radius: 16px;
+            cursor: pointer; transition: background .15s;
+        }
+        button:hover { background: #245580; }
+        button:disabled { background: #b8c6d8; cursor: not-allowed; }
         .result-block {
-            margin-top: 28px;
-            background: #f0f5fe;
-            border-radius: 20px;
-            padding: 20px 22px;
-            border-left: 6px solid #2e6b9e;
-            transition: all 0.2s;
+            margin-top: 24px; background: #f0f5fe; border-radius: 20px;
+            padding: 20px 22px; border-left: 6px solid #2e6b9e;
         }
         .result-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            font-weight: 600;
-            color: #3f5e7c;
-            margin-bottom: 6px;
+            font-size: .8rem; text-transform: uppercase;
+            letter-spacing: .6px; font-weight: 600;
+            color: #3f5e7c; margin-bottom: 6px;
         }
         .code-value {
-            font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
-            font-size: 1.4rem;
-            font-weight: 600;
-            word-break: break-all;
-            color: #0a1e2f;
-            background: #ffffff;
-            padding: 12px 16px;
-            border-radius: 12px;
-            border: 1px solid #cdddf0;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
-            line-height: 1.4;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            font-size: 1.35rem; font-weight: 600; word-break: break-all;
+            color: #0a1e2f; background: #fff; padding: 12px 16px;
+            border-radius: 12px; border: 1px solid #cdddf0; line-height: 1.4;
+        }
+        .warn {
+            margin-top: 16px; padding: 14px 16px; background: #fff4e5;
+            border-left: 5px solid #e8a33d; border-radius: 12px;
+            font-size: .9rem; color: #6b4a12;
         }
         .footer-note {
-            margin-top: 16px;
-            font-size: 0.78rem;
-            color: #8598b0;
-            text-align: right;
+            margin-top: 16px; font-size: .78rem;
+            color: #8598b0; text-align: right;
         }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 <div class="card">
-    <h1>⚛️ Физика · 8.1</h1>
-    <div class="sub">Выберите фамилию, имя и отчество — код появится автоматически</div>
-
-    <label for="studentSelect">ФИО ученика</label>
-    <select id="studentSelect">
-        <option value="" disabled selected>— выберите из списка —</option>
-    </select>
-
-    <div class="result-block">
-        <div class="result-label">Индивидуальный код</div>
-        <div id="codeContainer" class="code-value">—</div>
+    <h1>🧬 Биология · 8.1</h1>
+    <div class="sub">
+        Выберите своё ФИО и нажмите «Получить код». Код показывается
+        <b>один раз</b> — сохраните его для регистрации на олимпиаде.
     </div>
-    <div class="footer-note">19468 · Физика · 8 класс</div>
+
+    <div id="step1">
+        <label for="studentSelect">ФИО ученика</label>
+        <select id="studentSelect">
+            <option value="" disabled selected>— выберите из списка —</option>
+        </select>
+        <button id="getCodeBtn" disabled>Получить код</button>
+    </div>
+
+    <div id="step2" class="hidden">
+        <div class="result-block">
+            <div class="result-label">Ваш индивидуальный код</div>
+            <div id="codeContainer" class="code-value">—</div>
+        </div>
+        <div class="warn">
+            ⚠️ <b>Скопируйте код сейчас.</b> При повторном открытии страницы
+            он больше не отобразится. Если потеряете — обратитесь к учителю.
+        </div>
+    </div>
+
+    <div id="blocked" class="hidden">
+        <div class="warn">
+            🔒 Вы уже получали код на этом устройстве. Повторная выдача
+            невозможна.<br>Если код утерян — обратитесь к учителю.
+        </div>
+    </div>
+
+    <div class="footer-note">19534 · Биология · 8 класс</div>
 </div>
 
 <script>
-    (function() {
-        // Данные из файла "8.1 - физика.xlsx"
-        const students = [
-            { code: "19468/edu526320/8/g98633rz", name: "Авербух Маргарита Вячеславовна" },
-            { code: "19468/edu526320/8/785vqvr6", name: "Алексеев Артём Александрович" },
-            { code: "19468/edu526320/8/782z558q", name: "Алексеев Матвей Александрович" },
-            { code: "19468/edu526320/8/7876gzr2", name: "Афанасьева Анастасия Олеговна" },
-            { code: "19468/edu526320/8/27826z8q", name: "Бесков Николай Анатольевич" },
-            { code: "19468/edu526320/8/97852vr6", name: "Богомолов Павел Сергеевич" },
-            { code: "19468/edu526320/8/9785gv86", name: "Варламов Никита Дмитриевич" },
-            { code: "19468/edu526320/8/78zg2vr4", name: "Ганюшина Ульяна Алексеевна" },
-            { code: "19468/edu526320/8/7829zzrq", name: "Господчиков Арсений Сергеевич" },
-            { code: "19468/edu526320/8/gqrwvz8z", name: "Дружинин Роман Алексеевич" },
-            { code: "19468/edu526320/8/538345rv", name: "Евтушок Глеб Андреевич" },
-            { code: "19468/edu526320/8/gqrw3zrz", name: "Ерышов Семен Александрович" },
-            { code: "19468/edu526320/8/v8qvz9r4", name: "Игнатьев Денис Данилович" },
-            { code: "19468/edu526320/8/787665r2", name: "Клопова Алина Вячеславовна" },
-            { code: "19468/edu526320/8/978562r6", name: "Коробкова Кристина Дмитриевна" },
-            { code: "19468/edu526320/8/59r4928g", name: "Левицкий Дмитрий Денисович" },
-            { code: "19468/edu526320/8/32rg59rz", name: "Лисин Ярослав Алексеевич" },
-            { code: "19468/edu526320/8/787z7zr2", name: "Любимцев Илья Алексеевич" },
-            { code: "19468/edu526320/8/78zw7wr4", name: "Лязгина Полина Ильинична" },
-            { code: "19468/edu526320/8/58v94qrw", name: "Майоров Артем Андреевич" },
-            { code: "19468/edu526320/8/78zw4wr4", name: "Миронова Анна Вячеславовна" },
-            { code: "19468/edu526320/8/9r49ww8g", name: "Мишарин Матвей Алексеевич" },
-            { code: "19468/edu526320/8/986vzv8z", name: "Момин Матвей Константинович" },
-            { code: "19468/edu526320/8/9r495w8g", name: "Самойлин Никита Александрович" },
-            { code: "19468/edu526320/8/9r47g28g", name: "Сказнев Роман Ильич" },
-            { code: "19468/edu526320/8/2rgzv38z", name: "Соколова Нелли Алексеевна" },
-            { code: "19468/edu526320/8/782zq48q", name: "Старшинов Тимофей Алексеевич" },
-            { code: "19468/edu526320/8/789qww8g", name: "Федосенко Макар Павлович" }
-        ];
+(function() {
+    // ================================================================
+    // Коды зашифрованы XOR-ом с ключом, зависящим от индекса ученика.
+    // В исходнике страницы в открытом виде кодов нет.
+    // ================================================================
 
-        const selectEl = document.getElementById('studentSelect');
-        const codeContainer = document.getElementById('codeContainer');
+    const SECRET = "bio81_2024_secret_xK9";
 
-        // Заполняем select опциями
-        students.forEach((student, index) => {
-            const option = document.createElement('option');
-            option.value = index;
-            option.textContent = student.name;
-            selectEl.appendChild(option);
-        });
+    function keyFor(i) {
+        return SECRET + "#" + i + "#" + (i * 7919 % 251);
+    }
 
-        function updateCode() {
-            const selectedIndex = selectEl.value;
-            if (selectedIndex === '' || selectedIndex === undefined) {
-                codeContainer.textContent = '—';
-                return;
-            }
-            const student = students[selectedIndex];
-            codeContainer.textContent = student ? student.code : '—';
+    function xorCipher(text, key) {
+        let out = "";
+        for (let i = 0; i < text.length; i++) {
+            const c = text.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+            out += c.toString(16).padStart(4, "0");
         }
+        return out;
+    }
+    function xorDecipher(hex, key) {
+        let out = "";
+        for (let i = 0; i < hex.length; i += 4) {
+            const c = parseInt(hex.substr(i, 4), 16);
+            out += String.fromCharCode(c ^ key.charCodeAt((i/4) % key.length));
+        }
+        return out;
+    }
 
-        selectEl.addEventListener('change', updateCode);
-        updateCode();
-    })();
+    // Данные из файла "Биология 8.1.xlsx"
+    const RAW = [
+        ["Авербух Маргарита Вячеславовна",   "19534/edu526320/8/9785qv8g"],
+        ["Алексеев Артём Александрович",     "19534/edu526320/8/742zzv4z"],
+        ["Алексеев Матвей Александрович",    "19534/edu526320/8/3r4gz38z"],
+        ["Афанасьева Анастасия Олеговна",    "19534/edu526320/8/v28rqw43"],
+        ["Бесков Николай Анатольевич",       "19534/edu526320/8/r4gz6q8z"],
+        ["Богомолов Павел Сергеевич",        "19534/edu526320/8/r742v74z"],
+        ["Варламов Никита Дмитриевич",       "19534/edu526320/8/7876z54r"],
+        ["Ганюшина Ульяна Алексеевна",       "19534/edu526320/8/7429z78z"],
+        ["Господчиков Арсений Сергеевич",    "19534/edu526320/8/785z3r4g"],
+        ["Дружинин Роман Алексеевич",        "19534/edu526320/8/3r4g334z"],
+        ["Евтушок Глеб Андреевич",           "19534/edu526320/8/9785gv8g"],
+        ["Ерышов Семен Александрович",       "19534/edu526320/8/w383q78v"],
+        ["Игнатьев Денис Данилович",         "19534/edu526320/8/3r4gq94z"],
+        ["Клопова Алина Вячеславовна",       "19534/edu526320/8/w383g78v"],
+        ["Коробкова Кристина Дмитриевна",    "19534/edu526320/8/r78zvw86"],
+        ["Левицкий Дмитрий Денисович",       "19534/edu526320/8/3832w74v"],
+        ["Лисин Ярослав Алексеевич",         "19534/edu526320/8/r4gz338z"],
+        ["Любимцев Илья Алексеевич",         "19534/edu526320/8/q7873g8r"],
+        ["Лязгина Полина Ильинична",         "19534/edu526320/8/9785rv4g"],
+        ["Майоров Артем Андреевич",          "19534/edu526320/8/78zw3946"],
+        ["Миронова Анна Вячеславовна",       "19534/edu526320/8/q787rg4r"],
+        ["Мишарин Матвей Алексеевич",        "19534/edu526320/8/q4wgz24v"],
+        ["Момин Матвей Константинович",      "19534/edu526320/8/gq4wvz8v"],
+        ["Самойлин Никита Александрович",    "19534/edu526320/8/789wqv8v"],
+        ["Сказнев Роман Ильич",              "19534/edu526320/8/258v658g"],
+        ["Соколова Нелли Алексеевна",        "19534/edu526320/8/97853v8g"],
+        ["Старшинов Тимофей Алексеевич",     "19534/edu526320/8/28r72w43"],
+        ["Федосенко Макар Павлович",         "19534/edu526320/8/w7895v8v"]
+    ];
+
+    const students = RAW.map(([name, code], i) => ({
+        name: name,
+        enc: xorCipher(code, keyFor(i))
+    }));
+
+    // ---------- Логика ----------
+    const LS_KEY = "bio81_code_received_v1";
+
+    const selectEl = document.getElementById('studentSelect');
+    const getBtn   = document.getElementById('getCodeBtn');
+    const step1    = document.getElementById('step1');
+    const step2    = document.getElementById('step2');
+    const blocked  = document.getElementById('blocked');
+    const codeEl   = document.getElementById('codeContainer');
+
+    students.forEach((s, i) => {
+        const o = document.createElement('option');
+        o.value = i;
+        o.textContent = s.name;
+        selectEl.appendChild(o);
+    });
+
+    // Если уже получал — блокируем
+    if (localStorage.getItem(LS_KEY)) {
+        step1.classList.add('hidden');
+        step2.classList.add('hidden');
+        blocked.classList.remove('hidden');
+        return;
+    }
+
+    selectEl.addEventListener('change', () => {
+        getBtn.disabled = selectEl.value === "";
+    });
+
+    getBtn.addEventListener('click', () => {
+        const idx = parseInt(selectEl.value, 10);
+        if (isNaN(idx)) return;
+
+        const code = xorDecipher(students[idx].enc, keyFor(idx));
+        codeEl.textContent = code;
+
+        try {
+            localStorage.setItem(LS_KEY, JSON.stringify({
+                idx: idx, ts: Date.now()
+            }));
+        } catch (e) {}
+
+        step1.classList.add('hidden');
+        step2.classList.remove('hidden');
+    });
+})();
 </script>
 </body>
 </html>
